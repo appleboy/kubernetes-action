@@ -26,3 +26,11 @@ inputs:
     description: 'Context name (default: "default")'
   debug:
     description: 'Enable debug mode (default: false)'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+
+branding:
+  icon: 'terminal'
+  color: 'gray-dark'
