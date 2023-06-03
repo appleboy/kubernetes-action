@@ -21,3 +21,18 @@ See [action.yml](./action.yml) for more detailed information.
 | authinfo_name   | AuthInfo name                                              |          | default       |
 | context_name    | Context name                                               |          | default       |
 | debug           | Enable debug mode                                          |          | false         |
+
+## Usage
+
+Update deployment.
+
+```yaml
+- name: Update deployment
+  uses: appleboy/kubernetes-action@master
+  with:
+    server: ${{ secrets.K8S_SERVER }}
+    ca_cert: ${{ secrets.K8S_CA_CERT }}
+    token: ${{ secrets.K8S_TOKEN }}
+    namespace: github-action
+    templates: example/deployment.yaml
+```
