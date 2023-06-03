@@ -17,3 +17,4 @@ jobs:
         token: ${{ secrets.K8S_TOKEN }}
         namespace: github-action
         templates: example/deployment.yaml
+        debug: true
