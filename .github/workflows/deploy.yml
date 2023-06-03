@@ -43,3 +43,4 @@ jobs:
         deployment: nginx
         container: nginx
         image: nginx:1.24.0
+        debug: true
