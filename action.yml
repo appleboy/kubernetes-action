@@ -43,5 +43,5 @@ runs:
   image: 'Dockerfile'
 
 branding:
-  icon: 'terminal'
-  color: 'gray-dark'
+  icon: "cloud"
+  color: "blue"
