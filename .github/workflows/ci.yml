@@ -5,6 +5,8 @@ jobs:
   update_deployment:
     name: update deployment
     runs-on: ubuntu-latest
+    env:
+      INPUT_APP_NAME: nginx
     steps:
     - name: checkout
       uses: actions/checkout@v1
@@ -26,4 +28,3 @@ jobs:
         token: ${{ secrets.K8S_TOKEN }}
         namespace: github-action
         templates: example/deployment02.yaml
-        app_name: nginx
