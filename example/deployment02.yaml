@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .app_name }}
+  namespace: github-action
+  labels:
+    app: {{ .app_name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .app_name }}
+  template:
+    metadata:
+      name: {{ .app_name }}
+      labels:
+        app: {{ .app_name }}
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.25.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 80
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
