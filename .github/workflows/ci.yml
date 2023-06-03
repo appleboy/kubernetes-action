@@ -5,8 +5,6 @@ jobs:
   update_deployment:
     name: update deployment
     runs-on: ubuntu-latest
-    env:
-      INPUT_APP_NAME: nginx
     steps:
     - name: checkout
       uses: actions/checkout@v1
@@ -22,6 +20,8 @@ jobs:
 
     - name: deploy by variable
       uses: ./
+      env:
+        INPUT_APP_NAME: nginx
       with:
         server: ${{ secrets.K8S_SERVER }}
         ca_cert: ${{ secrets.K8S_CA_CERT }}
