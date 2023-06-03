@@ -28,4 +28,5 @@ jobs:
       env:
         KUBECONFIG: kubeconfig.yaml
       run: |
+        sudo chmod 644 kubeconfig.yaml
         kubectl get pods -n github-action
