@@ -26,7 +26,9 @@ See [action.yml](./action.yml) for more detailed information.
 
 ## Usage
 
-Update deployment.
+### deploy deployment without variable
+
+Update deployment. See the [deployment file](./example/deployment01.yaml)
 
 ```yaml
 - name: Update deployment
@@ -36,5 +38,58 @@ Update deployment.
     ca_cert: ${{ secrets.K8S_CA_CERT }}
     token: ${{ secrets.K8S_TOKEN }}
     namespace: github-action
-    templates: example/deployment.yaml
+    templates: example/deployment01.yaml
+```
+
+### deploy deployment with custom variable
+
+Use custom variabe in template. See the following deployment file:
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .envs.app_name }}
+  namespace: github-action
+  labels:
+    app: {{ .envs.app_name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .envs.app_name }}
+  template:
+    metadata:
+      name: {{ .envs.app_name }}
+      labels:
+        app: {{ .envs.app_name }}
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.25.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 80
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+```
+
+See the `{{ .envs.app_name }}` variable and add environment variables by specifying a prefix containing `INPUT_`.
+
+```diff
+  - name: deploy by variable
+    uses: ./
++   env:
++     INPUT_APP_NAME: nginx
+    with:
+      server: ${{ secrets.K8S_SERVER }}
+      ca_cert: ${{ secrets.K8S_CA_CERT }}
+      token: ${{ secrets.K8S_TOKEN }}
+      namespace: github-action
+      templates: example/deployment02.yaml
 ```
