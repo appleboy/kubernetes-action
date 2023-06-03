@@ -136,6 +136,6 @@ In the above configuration, the appleboy/kubernetes-action action is used to upd
 * **container**: The name of the container within the deployment to update.
 * **image**: The new image and tag that you want to use for the container.
 
-Make sure to replace the placeholder values (${{ secrets.K8S_SERVER }}, ${{ secrets.K8S_CA_CERT }}, and ${{ secrets.K8S_TOKEN }}) with the appropriate values or secrets from your environment or repository settings. Similarly, replace nginx with the actual names of your deployment and container.
+Make sure to replace the placeholder values (`${{ secrets.K8S_SERVER }}`, `${{ secrets.K8S_CA_CERT }}`, and `${{ secrets.K8S_TOKEN }}`) with the appropriate values or secrets from your environment or repository settings. Similarly, replace nginx with the actual names of your deployment and container.
 
 By executing this action, the specified deployment's container image will be updated to the specified version, allowing you to roll out new changes or upgrades to your application.
