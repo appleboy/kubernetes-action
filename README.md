@@ -171,6 +171,6 @@ In the above configuration, the kubeconfig file is generated using the specified
 
 After generating the kubeconfig file, it can be used to authenticate subsequent `kubectl` commands. In the next step, the `KUBECONFIG` environment variable is set to the generated kubeconfig file path (`kubeconfig.yaml`). This ensures that kubectl uses the generated kubeconfig file for authentication when running the command kubectl get pods -n github-action.
 
-Please note that the sudo chmod 644 kubeconfig.yaml command is included to set the appropriate permissions for the kubeconfig file, allowing it to be readable by the user running the command.
+Please note that the `sudo chmod 644 kubeconfig.yaml` command is included to set the appropriate permissions for the kubeconfig file, allowing it to be readable by the user running the command.
 
 By following this configuration, you can generate a kubeconfig file and use it to perform Kubernetes operations within the specified namespace.
