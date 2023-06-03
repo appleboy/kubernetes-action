@@ -1,6 +1,7 @@
 # kubernetes-action
 
 [![deploy kubernetes](https://github.com/appleboy/kubernetes-action/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/appleboy/kubernetes-action/actions/workflows/ci.yml)
+[![kubectl command](https://github.com/appleboy/kubernetes-action/actions/workflows/kubectl.yml/badge.svg?branch=main)](https://github.com/appleboy/kubernetes-action/actions/workflows/kubectl.yml)
 
 Generate a Kubeconfig or creating or updating K8s Deployments. This action is a wrapper around the [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/) command line tool to make it easier to use in a [GitHub Action](https://github.com/features/actions).
 
