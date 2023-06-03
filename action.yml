@@ -20,10 +20,13 @@ inputs:
     description: 'Templates to render, supports glob pattern'
   cluster_name:
     description: 'Cluster name (default: "default")'
+    default: 'default'
   authinfo_name:
     description: 'AuthInfo name (default: "default")'
+    default: 'default'
   context_name:
     description: 'Context name (default: "default")'
+    default: 'default'
   debug:
     description: 'Enable debug mode (default: false)'
 
