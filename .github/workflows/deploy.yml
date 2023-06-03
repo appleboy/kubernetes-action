@@ -25,7 +25,7 @@ jobs:
     - name: Deploy Deployment with Custom Variables
       uses: ./
       env:
-        INPUT_APP_NAME: nginx
+        INPUT_APP_NAME: demo
       with:
         server: ${{ secrets.K8S_SERVER }}
         ca_cert: ${{ secrets.K8S_CA_CERT }}
@@ -40,7 +40,7 @@ jobs:
         ca_cert: ${{ secrets.K8S_CA_CERT }}
         token: ${{ secrets.K8S_TOKEN }}
         namespace: github-action
-        deployment: nginx
+        deployment: demo
         container: nginx
         image: nginx:1.24.0
         debug: true
