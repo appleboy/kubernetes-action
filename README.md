@@ -109,3 +109,30 @@ In the above file, you can see the use of `{{ .envs.app_name }}` variable. To ad
 By adding the env section and specifying `INPUT_APP_NAME: nginx`, you can pass the value of nginx to the `{{ .envs.app_name }}` variable in the deployment file.
 
 Please note that this assumes you are using a deployment script or workflow that supports environment variables and can replace the placeholders with their corresponding values during deployment.
+
+## Update Deployment Container Image
+
+To update a deployment container image, you can use the following configuration:
+
+```diff
+  - name: Update deployment
+    uses: appleboy/kubernetes-action@master
+    with:
+      server: ${{ secrets.K8S_SERVER }}
+      ca_cert: ${{ secrets.K8S_CA_CERT }}
+      token: ${{ secrets.K8S_TOKEN }}
+      namespace: github-action
++     deployment: nginx
++     container: nginx
++     image: nginx:1.24.0
+```
+
+In the above configuration, the appleboy/kubernetes-action action is used to update the deployment's container image. Here's an explanation of the added parameters:
+
+* **deployment**: The name of the deployment to update.
+* **container**: The name of the container within the deployment to update.
+* **image**: The new image and tag that you want to use for the container.
+
+Make sure to replace the placeholder values (${{ secrets.K8S_SERVER }}, ${{ secrets.K8S_CA_CERT }}, and ${{ secrets.K8S_TOKEN }}) with the appropriate values or secrets from your environment or repository settings. Similarly, replace nginx with the actual names of your deployment and container.
+
+By executing this action, the specified deployment's container image will be updated to the specified version, allowing you to roll out new changes or upgrades to your application.

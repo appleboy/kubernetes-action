@@ -9,7 +9,7 @@ jobs:
     - name: checkout
       uses: actions/checkout@v1
 
-    - name: deploy single file
+    - name: Update deployment
       uses: ./
       with:
         server: ${{ secrets.K8S_SERVER }}
@@ -18,7 +18,7 @@ jobs:
         namespace: github-action
         templates: example/deployment01.yaml
 
-    - name: deploy by variable
+    - name: Deploy Deployment with Custom Variables
       uses: ./
       env:
         INPUT_APP_NAME: nginx
