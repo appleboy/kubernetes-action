@@ -1,4 +1,4 @@
-FROM appleboy/deploy-k8s:0.0.3
+FROM appleboy/deploy-k8s:latest
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
