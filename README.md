@@ -3,7 +3,9 @@
 [![deploy kubernetes](https://github.com/appleboy/kubernetes-action/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/appleboy/kubernetes-action/actions/workflows/deploy.yml)
 [![kubectl command](https://github.com/appleboy/kubernetes-action/actions/workflows/kubectl.yml/badge.svg?branch=main)](https://github.com/appleboy/kubernetes-action/actions/workflows/kubectl.yml)
 
-Generate a Kubeconfig or creating or updating K8s Deployments. This action is a wrapper around the [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/) command line tool to make it easier to use in a [GitHub Action](https://github.com/features/actions).
+The Kubernetes Action Tool is a versatile tool that facilitates interactions with Kubernetes clusters. This action is a wrapper around the [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/) command line tool to make it easier to use in a [GitHub Action](https://github.com/features/actions).
+
+With this Kubernetes Action Tool, you can perform various operations and configurations on Kubernetes clusters by leveraging these parameters. Whether it's updating deployments, managing containers, generating kubeconfig files, or performing other Kubernetes-related tasks, this tool provides flexibility and control over your cluster operations.
 
 This thing is built using [Golang](https://go.dev) and [deploy-k8s](https://github.com/appleboy/deploy-k8s). 🚀
 
