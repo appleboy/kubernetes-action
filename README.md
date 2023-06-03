@@ -26,6 +26,7 @@ See [action.yml](./action.yml) for more detailed information.
 | `deployment`     | Name of the Kubernetes deployment to update                  | -        | -             |
 | `container`      | Name of the container within the deployment to update        | -        | -             |
 | `image`          | New image and tag for the container                          | -        | -             |
+| `output`         | Output kubeconfig to file                                    | -        | -             |
 | `debug`          | Enable debug mode (default: `false`)                         | -        | `false`       |
 
 ## Usage
