@@ -140,3 +140,34 @@ In the above configuration, the appleboy/kubernetes-action action is used to upd
 Make sure to replace the placeholder values (`${{ secrets.K8S_SERVER }}`, `${{ secrets.K8S_CA_CERT }}`, and `${{ secrets.K8S_TOKEN }}`) with the appropriate values or secrets from your environment or repository settings. Similarly, replace nginx with the actual names of your deployment and container.
 
 By executing this action, the specified deployment's container image will be updated to the specified version, allowing you to roll out new changes or upgrades to your application.
+
+### Generate Kubeconfig file
+
+To generate a kubeconfig file and use it for subsequent Kubernetes operations, you can follow this configuration:
+
+```diff
+  - name: generate kubeconfig
+    uses: ./
+    with:
+      server: ${{ secrets.K8S_SERVER }}
+      ca_cert: ${{ secrets.K8S_CA_CERT }}
+      token: ${{ secrets.K8S_TOKEN }}
++     output: kubeconfig.yaml
+
+  - name: get pods in github-action namespace
+    env:
++     KUBECONFIG: kubeconfig.yaml
+    run: |
+      sudo chmod 644 kubeconfig.yaml
+      kubectl get pods -n github-action
+```
+
+In the above configuration, the kubeconfig file is generated using the specified parameters for server address, certificate authority (CA) certificate, and token. Here's an explanation of the added parameter:
+
+* **output**: Specifies the output file name for the generated kubeconfig file. In this example, it is set to `kubeconfig.yaml`.
+
+After generating the kubeconfig file, it can be used to authenticate subsequent `kubectl` commands. In the next step, the `KUBECONFIG` environment variable is set to the generated kubeconfig file path (`kubeconfig.yaml`). This ensures that kubectl uses the generated kubeconfig file for authentication when running the command kubectl get pods -n github-action.
+
+Please note that the sudo chmod 644 kubeconfig.yaml command is included to set the appropriate permissions for the kubeconfig file, allowing it to be readable by the user running the command.
+
+By following this configuration, you can generate a kubeconfig file and use it to perform Kubernetes operations within the specified namespace.
