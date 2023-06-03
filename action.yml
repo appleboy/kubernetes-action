@@ -4,12 +4,14 @@ author: 'Bo-Yi Wu'
 inputs:
   server:
     description: 'Address of the Kubernetes cluster'
+    required: true
   skip_tls_verify:
     description: 'Skip validity check for server certificate (default: false)'
   ca_cert:
     description: 'PEM-encoded certificate authority certificates'
   token:
     description: 'Kubernetes service account token'
+    required: true
   namespace:
     description: 'Kubernetes namespace'
   proxy_url:
