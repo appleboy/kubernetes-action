@@ -33,6 +33,8 @@ inputs:
     description: 'Name of the container within the deployment to update'
   image:
     description: 'New image and tag for the container'
+  output:
+    description: 'Output kubeconfig to file'
   debug:
     description: 'Enable debug mode (default: false)'
 
