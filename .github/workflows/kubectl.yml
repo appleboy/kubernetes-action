@@ -1,0 +1,17 @@
+name: kubectl command
+on: [push]
+
+jobs:
+  update_deployment:
+    name: update deployment
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v1
+
+    - name: install cli command
+      run: |
+        curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+        chmod 755 kubectl
+        mv kubectl /usr/local/bin/kubectl
+
