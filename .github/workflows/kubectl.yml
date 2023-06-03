@@ -1,5 +1,9 @@
 name: kubectl command
-on: [push]
+
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   update_deployment:
