@@ -26,7 +26,7 @@ See [action.yml](./action.yml) for more detailed information.
 
 ## Usage
 
-### deploy deployment without variable
+### Update Deployment
 
 To update a deployment, you can use the following configuration:
 

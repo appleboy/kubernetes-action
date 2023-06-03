@@ -27,6 +27,12 @@ inputs:
   context_name:
     description: 'Context name (default: "default")'
     default: 'default'
+  deployment:
+    description: 'kubernetes deployment name'
+  container:
+    description: 'kubernetes deployment container name'
+  image:
+    description: 'kubernetes deployment image name'
   debug:
     description: 'Enable debug mode (default: false)'
 
