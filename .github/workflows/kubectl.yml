@@ -3,7 +3,7 @@ on: [push]
 
 jobs:
   update_deployment:
-    name: update deployment
+    name: generate kubeconfig
     runs-on: ubuntu-latest
     steps:
     - name: checkout
