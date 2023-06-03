@@ -28,11 +28,11 @@ inputs:
     description: 'Context name (default: "default")'
     default: 'default'
   deployment:
-    description: 'kubernetes deployment name'
+    description: 'Name of the Kubernetes deployment to update'
   container:
-    description: 'kubernetes deployment container name'
+    description: 'Name of the container within the deployment to update'
   image:
-    description: 'kubernetes deployment image name'
+    description: 'New image and tag for the container'
   debug:
     description: 'Enable debug mode (default: false)'
 

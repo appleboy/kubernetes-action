@@ -10,19 +10,22 @@ This thing is built using [Golang](https://go.dev) and [deploy-k8s](https://gith
 
 See [action.yml](./action.yml) for more detailed information.
 
-| Parameter       | Description                                               | Required | Default Value |
-|-----------------|-----------------------------------------------------------|----------|---------------|
-| server          | Address of the Kubernetes cluster                          | true     |               |
-| skip_tls_verify | Skip validity check for server certificate                |          | false         |
-| ca_cert         | PEM-encoded certificate authority certificates            |          |               |
-| token           | Kubernetes service account token                           | true     |               |
-| namespace       | Kubernetes namespace                                       |          |               |
-| proxy_url       | URLs with http, https, and socks5                          |          |               |
-| templates       | Templates to render, supports glob pattern                 |          |               |
-| cluster_name    | Cluster name                                              |          | default       |
-| authinfo_name   | AuthInfo name                                              |          | default       |
-| context_name    | Context name                                               |          | default       |
-| debug           | Enable debug mode                                          |          | false         |
+| Parameter        | Description                                                  | Required | Default Value |
+| ---------------- | ------------------------------------------------------------ | -------- | ------------- |
+| `server`         | Address of the Kubernetes cluster                            | `true`   | -             |
+| `skip_tls_verify`| Skip validity check for server certificate (default: `false`) | -        | `false`       |
+| `ca_cert`        | PEM-encoded certificate authority certificates              | -        | -             |
+| `token`          | Kubernetes service account token                             | `true`   | -             |
+| `namespace`      | Kubernetes namespace                                         | -        | -             |
+| `proxy_url`      | URLs with http, https, and socks5 proxies                    | -        | -             |
+| `templates`      | Templates to render, supports glob pattern                   | -        | -             |
+| `cluster_name`   | Cluster name (default: "default")                            | -        | `default`     |
+| `authinfo_name`  | AuthInfo name (default: "default")                           | -        | `default`     |
+| `context_name`   | Context name (default: "default")                            | -        | `default`     |
+| `deployment`     | Name of the Kubernetes deployment to update                  | -        | -             |
+| `container`      | Name of the container within the deployment to update        | -        | -             |
+| `image`          | New image and tag for the container                          | -        | -             |
+| `debug`          | Enable debug mode (default: `false`)                         | -        | `false`       |
 
 ## Usage
 
