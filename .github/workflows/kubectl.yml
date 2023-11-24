@@ -10,27 +10,27 @@ jobs:
     name: generate kubeconfig
     runs-on: ubuntu-latest
     steps:
-    - name: checkout
-      uses: actions/checkout@v1
+      - name: checkout
+        uses: actions/checkout@v1
 
-    - name: install cli command
-      run: |
-        curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-        chmod 755 kubectl
-        mv kubectl /usr/local/bin/kubectl
-        kubectl version -o yaml --client
+      - name: install cli command
+        run: |
+          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          chmod 755 kubectl
+          mv kubectl /usr/local/bin/kubectl
+          kubectl version -o yaml --client
 
-    - name: generate kubeconfig
-      uses: ./
-      with:
-        server: ${{ secrets.K8S_SERVER }}
-        ca_cert: ${{ secrets.K8S_CA_CERT }}
-        token: ${{ secrets.K8S_TOKEN }}
-        output: kubeconfig.yaml
+      - name: generate kubeconfig
+        uses: ./
+        with:
+          server: ${{ secrets.K8S_SERVER }}
+          ca_cert: ${{ secrets.K8S_CA_CERT }}
+          token: ${{ secrets.K8S_TOKEN }}
+          output: kubeconfig.yaml
 
-    - name: get pods in github-action namespace
-      env:
-        KUBECONFIG: kubeconfig.yaml
-      run: |
-        sudo chmod 644 kubeconfig.yaml
-        kubectl get pods -n github-action
+      - name: get pods in github-action namespace
+        env:
+          KUBECONFIG: kubeconfig.yaml
+        run: |
+          sudo chmod 644 kubeconfig.yaml
+          kubectl get pods -n github-action
