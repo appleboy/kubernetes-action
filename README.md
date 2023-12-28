@@ -174,3 +174,25 @@ After generating the kubeconfig file, it can be used to authenticate subsequent 
 Please note that the `sudo chmod 644 kubeconfig.yaml` command is included to set the appropriate permissions for the kubeconfig file, allowing it to be readable by the user running the command.
 
 By following this configuration, you can generate a kubeconfig file and use it to perform Kubernetes operations within the specified namespace.
+
+## How To Get Kubernetes Server, CA Cert, and Token
+
+To get the Kubernetes server, CA certificate, and token, you can follow these steps:
+
+Run the following command to get the Kubernetes server address:
+
+```bash
+kubectl config view --minify -o jsonpath='{.clusters[0].cluster.server}'
+```
+
+Run the following command to get the Kubernetes CA certificate: (Don't base64 decode)
+
+```bash
+kubectl config view --raw --minify -o jsonpath='{.clusters[0].cluster.certificate-authority-data}'
+```
+
+Run the following command to get the Kubernetes token:
+
+```bash
+kubectl get secret $(kubectl get serviceaccount default -o jsonpath='{.secrets[0].name}') -o jsonpath='{.data.token}' | base64 --decode
+```
