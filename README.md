@@ -188,11 +188,14 @@ kubectl config view --minify -o jsonpath='{.clusters[0].cluster.server}'
 Run the following command to get the Kubernetes CA certificate: (Don't base64 decode)
 
 ```bash
-kubectl config view --raw --minify -o jsonpath='{.clusters[0].cluster.certificate-authority-data}'
+kubectl config view --raw --minify \
+  -o jsonpath='{.clusters[0].cluster.certificate-authority-data}'
 ```
 
 Run the following command to get the Kubernetes token:
 
 ```bash
-kubectl get secret $(kubectl get serviceaccount default -o jsonpath='{.secrets[0].name}') -o jsonpath='{.data.token}' | base64 --decode
+kubectl get secret $(kubectl get serviceaccount default \
+  -o jsonpath='{.secrets[0].name}') -o jsonpath='{.data.token}' \
+  | base64 --decode
 ```
