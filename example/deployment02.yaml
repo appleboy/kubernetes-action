@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .envs.app_name }}
-  namespace: github-action
+  namespace: test-namespace
   labels:
     app: {{ .envs.app_name }}
 spec:
