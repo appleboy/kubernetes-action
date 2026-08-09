@@ -27,7 +27,11 @@ jobs:
         run: |
           kubectl create namespace test-namespace
           kubectl apply -f example/serviceAccount.yaml
-          echo K8S_SERVER=$(kubectl config view --raw --minify --flatten -o jsonpath='{.clusters[].cluster.server}') >> $GITHUB_OUTPUT
+          # The action runs as a Docker container on the bridge network, where
+          # 0.0.0.0/127.0.0.1 points at the container itself. Reach the kind API
+          # server through the bridge gateway instead.
+          DOCKER_GATEWAY=$(docker network inspect bridge -f '{{(index .IPAM.Config 0).Gateway}}')
+          echo K8S_SERVER=$(kubectl config view --raw --minify --flatten -o jsonpath='{.clusters[].cluster.server}' | sed "s/0\.0\.0\.0/${DOCKER_GATEWAY}/") >> $GITHUB_OUTPUT
           echo K8S_CA_CERT=$(kubectl config view --raw --minify --flatten -o jsonpath='{.clusters[].cluster.certificate-authority-data}') >> $GITHUB_OUTPUT
           echo K8S_TOKEN=$(kubectl get secret deploy -n test-namespace -o jsonpath='{.data.token}' | base64 -d) >> $GITHUB_OUTPUT
 
@@ -36,6 +40,8 @@ jobs:
         with:
           server: ${{ steps.k8s_info.outputs.K8S_SERVER }}
           ca_cert: ${{ steps.k8s_info.outputs.K8S_CA_CERT }}
+          # the bridge gateway IP is not in the kind API server cert SANs
+          skip_tls_verify: true
           token: ${{ steps.k8s_info.outputs.K8S_TOKEN }}
           namespace: test-namespace
           templates: example/deployment01.yaml
@@ -47,6 +53,8 @@ jobs:
         with:
           server: ${{ steps.k8s_info.outputs.K8S_SERVER }}
           ca_cert: ${{ steps.k8s_info.outputs.K8S_CA_CERT }}
+          # the bridge gateway IP is not in the kind API server cert SANs
+          skip_tls_verify: true
           token: ${{ steps.k8s_info.outputs.K8S_TOKEN }}
           namespace: test-namespace
           templates: example/deployment02.yaml
@@ -56,6 +64,8 @@ jobs:
         with:
           server: ${{ steps.k8s_info.outputs.K8S_SERVER }}
           ca_cert: ${{ steps.k8s_info.outputs.K8S_CA_CERT }}
+          # the bridge gateway IP is not in the kind API server cert SANs
+          skip_tls_verify: true
           token: ${{ steps.k8s_info.outputs.K8S_TOKEN }}
           namespace: test-namespace
           deployment: demo
