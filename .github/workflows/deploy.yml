@@ -31,9 +31,14 @@ jobs:
           # 0.0.0.0/127.0.0.1 points at the container itself. Reach the kind API
           # server through the bridge gateway instead.
           DOCKER_GATEWAY=$(docker network inspect bridge -f '{{(index .IPAM.Config 0).Gateway}}')
-          echo K8S_SERVER=$(kubectl config view --raw --minify --flatten -o jsonpath='{.clusters[].cluster.server}' | sed "s/0\.0\.0\.0/${DOCKER_GATEWAY}/") >> $GITHUB_OUTPUT
-          echo K8S_CA_CERT=$(kubectl config view --raw --minify --flatten -o jsonpath='{.clusters[].cluster.certificate-authority-data}') >> $GITHUB_OUTPUT
-          echo K8S_TOKEN=$(kubectl get secret deploy -n test-namespace -o jsonpath='{.data.token}' | base64 -d) >> $GITHUB_OUTPUT
+          if [ -z "$DOCKER_GATEWAY" ]; then
+            echo "::error::failed to resolve the docker bridge gateway IP"
+            exit 1
+          fi
+          K8S_SERVER=$(kubectl config view --raw --minify --flatten -o jsonpath='{.clusters[].cluster.server}' | sed -E "s/0\.0\.0\.0|127\.0\.0\.1/${DOCKER_GATEWAY}/")
+          echo "K8S_SERVER=${K8S_SERVER}" >> "$GITHUB_OUTPUT"
+          echo "K8S_CA_CERT=$(kubectl config view --raw --minify --flatten -o jsonpath='{.clusters[].cluster.certificate-authority-data}')" >> "$GITHUB_OUTPUT"
+          echo "K8S_TOKEN=$(kubectl get secret deploy -n test-namespace -o jsonpath='{.data.token}' | base64 -d)" >> "$GITHUB_OUTPUT"
 
       - name: Create deployment
         uses: ./
